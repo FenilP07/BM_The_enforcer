@@ -1,0 +1,199 @@
+{
+  "name": "the-enforcer",
+  "displayName": "The Enforcer",
+  "description": "Brutalist task-limiter that punishes procrastination and rewards execution. Maximum 3 tasks, 24-hour deadlines, real consequences.",
+  "version": "1.0.0",
+  "publisher": "Stranger07",
+  "author": {
+    "name": "Stranger07"
+  },
+  "license": "MIT",
+  "keywords": [
+    "productivity",
+    "task-management",
+    "todo",
+    "accountability",
+    "deadline",
+    "focus",
+    "time-management",
+    "brutalist",
+    "procrastination",
+    "execution",
+    "tasks",
+    "enforcer",
+    "discipline"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#000000",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "enforcer.add",
+        "title": "Add Task",
+        "category": "BM",
+        "icon": "$(add)"
+      },
+      {
+        "command": "enforcer.list",
+        "title": "List Tasks",
+        "category": "BM",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "enforcer.done",
+        "title": "Complete Task",
+        "category": "BM",
+        "icon": "$(check)"
+      },
+      {
+        "command": "enforcer.apology",
+        "title": "Apologize (Break Lockout)",
+        "category": "BM",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "enforcer.status",
+        "title": "System Status",
+        "category": "BM",
+        "icon": "$(info)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "enforcer.add",
+        "key": "ctrl+alt+b a",
+        "mac": "cmd+alt+b a",
+        "when": "!enforcer.isLockedOut"
+      },
+      {
+        "command": "enforcer.list",
+        "key": "ctrl+alt+b l",
+        "mac": "cmd+alt+b l"
+      },
+      {
+        "command": "enforcer.done",
+        "key": "ctrl+alt+b d",
+        "mac": "cmd+alt+b d",
+        "when": "enforcer.hasActiveTasks"
+      },
+      {
+        "command": "enforcer.status",
+        "key": "ctrl+alt+b s",
+        "mac": "cmd+alt+b s"
+      },
+      {
+        "command": "enforcer.apology",
+        "key": "ctrl+alt+b escape",
+        "mac": "cmd+alt+b escape",
+        "when": "enforcer.isLockedOut"
+      }
+    ],
+    "configuration": {
+      "title": "The Enforcer",
+      "properties": {
+        "enforcer.taskLifetimeHours": {
+          "type": "number",
+          "default": 24,
+          "minimum": 1,
+          "maximum": 168,
+          "description": "Hours before a task expires (default: 24). Warning: Changing this violates The Enforcer's core philosophy."
+        },
+        "enforcer.maxSlots": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Maximum task slots (default: 3). Warning: Increasing this defeats the purpose of forced focus."
+        },
+        "enforcer.lockoutMinutes": {
+          "type": "number",
+          "default": 30,
+          "minimum": 5,
+          "maximum": 120,
+          "description": "Lockout duration in minutes after task expiry (default: 30)."
+        },
+        "enforcer.shameLogEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Write failure logs to .bm_shame file in workspace."
+        },
+        "enforcer.gitCommitPrompt": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prompt to commit shame log to Git after failures."
+        },
+        "enforcer.showCountdownInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display nearest task expiry countdown in status bar."
+        },
+        "enforcer.soundEffects": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play sound effects on task expiry (requires sound files)."
+        },
+        "enforcer.strictMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "EXTREME MODE: No apologies allowed, harsher penalties, no configuration overrides."
+        }
+      }
+    },
+    "colors": [
+      {
+        "id": "enforcer.statusBar.normal",
+        "description": "Status bar color when operating normally",
+        "defaults": {
+          "dark": "#000000",
+          "light": "#000000",
+          "highContrast": "#000000"
+        }
+      },
+      {
+        "id": "enforcer.statusBar.warning",
+        "description": "Status bar color when capacity is reduced",
+        "defaults": {
+          "dark": "#FF0000",
+          "light": "#FF0000",
+          "highContrast": "#FF0000"
+        }
+      },
+      {
+        "id": "enforcer.statusBar.locked",
+        "description": "Status bar color when locked out",
+        "defaults": {
+          "dark": "#FF0000",
+          "light": "#FF0000",
+          "highContrast": "#FF0000"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "vscode:prepublish": "npm run lint"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "20.x",
+    "eslint": "^8.54.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}

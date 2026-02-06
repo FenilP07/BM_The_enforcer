@@ -1,0 +1,5 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" fill="#000000"/>
+  <text x="64" y="80" font-family="monospace" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">BM</text>
+  <rect x="10" y="10" width="108" height="108" fill="none" stroke="#FF0000" stroke-width="2"/>
+</svg>
