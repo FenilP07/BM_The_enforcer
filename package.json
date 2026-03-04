@@ -37,7 +37,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./extension.js",
+  "main": "./new.js",
   "contributes": {
     "commands": [
       {
@@ -69,6 +69,30 @@
         "title": "System Status",
         "category": "BM",
         "icon": "$(info)"
+      },
+      {
+        "command": "enforcer.login",
+        "title": "Login",
+        "category": "BM",
+        "icon": "$(account)"
+      },
+      {
+        "command": "enforcer.logout",
+        "title": "Logout",
+        "category": "BM",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "enforcer.leaderboard",
+        "title": "Leaderboard",
+        "category": "BM",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "enforcer.register",
+        "title": "Register",
+        "category": "BM",
+        "icon": "$(add)"
       }
     ],
     "keybindings": [
@@ -149,6 +173,11 @@
           "type": "boolean",
           "default": false,
           "description": "EXTREME MODE: No apologies allowed, harsher penalties, no configuration overrides."
+        },
+        "enforcer.apiBaseUrl": {
+          "type": "string",
+          "default": "http://localhost:4000",
+          "description": "Backend API base URL for Enforcer (used for login/sync/leaderboard)."
         }
       }
     },

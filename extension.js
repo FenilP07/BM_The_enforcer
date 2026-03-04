@@ -136,7 +136,7 @@ function checkForFailures(context) {
   }
 }
 
-function handleTaskExpiry(context, expiredTasks) {
+function handleTaskExpiry(context, expiredTasks) {  
   const state = getState(context);
   const config = vscode.workspace.getConfiguration("enforcer");
   if (config.get("shameLogEnabled")) writeShameLog(expiredTasks);
